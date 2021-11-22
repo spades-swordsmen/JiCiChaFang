@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <title>季疵茶坊|商品</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.icoo" type="image/x-icon"/>
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/simple-line-icons.css" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="css/helper.min.css" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="css/plugins.css" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--页头-->
+<div class="header-menu-area sticky pt-10 pb-10 pt-md-10 pb-md-10 pt-sm-10 pb-sm-10">
+    <div class="container">
+        <div class="header-menu-inner">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-6">
+                    <div class="logo">
+                        <a href="#"><img src="/img/logo/logo.png" alt="brand logo"></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu">
+                        <nav id="mobile-menu">
+                            <ul>
+                                <li class="static">
+                                    <a href="/">首页</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">商品</a>
+                                </li>
+                                <li class="static">
+                                    <a href="/showCollectGood">我的收藏</a>
+                                </li>
+                                <li>
+                                    <a href="/showCart">购物车</a>
+                                </li>
+                                <li>
+                                    <a href="/showPersonal">个人中心</a>
+                                </li>
+                                <li>
+                                    <a href="/login">你好!{{true_name}}</a>
+                                </li>
+                                {{if user_id}}
+                                <li>
+                                    <a href="/signOut">退出</a>
+                                </li>
+                                {{/if}}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- 头部·右侧（搜索框和购物车商品数量显示）-->
+                <div class="col-lg-2 col-6">
+                    <div class="header-cart-option">
+                        <!--搜索框-->
+                        <div class="header-search">
+                            <!-- 搜索图标-->
+                            <div class="header-search-btn">
+                                <i class="icon-magnifier"></i>
+                            </div>
+                            <!-- 搜索栏-->
+                            <div class="search-box">
+                                <form action="/doSearchGoods?account={{account}}&user_id={{user_id}}" method="post">
+                                    <input type="text" name="goods_name" placeholder="看看有些啥？">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- 购物车商品数量的显示-->
+                        <!--<div class="cart-toggler">-->
+                        <!--&lt;!&ndash; 已选择商品数 &ndash;&gt;-->
+                        <!--<div class="cart-toggler-icon">-->
+                        <!--<button>-->
+                        <!--<i class="icon-handbag"></i>-->
+                        <!--<span class="add-qunatity">1</span>-->
+                        <!--</button>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; 购物车中商品显示&ndash;&gt;-->
+                        <!--<ul class="cart-list">-->
+                        <!--&lt;!&ndash; 商品信息&ndash;&gt;-->
+                        <!--<li id="goodInfo">-->
+                        <!--<div class="cart-img">-->
+                        <!--<a href="/showGoodDetail"><img src="/img/cart/cart-1.jpg" alt=""></a>-->
+                        <!--<span class="cart-quantity">2x &lt;!&ndash; 加入购物车商品的数目 &ndash;&gt;</span>-->
+                        <!--</div>-->
+                        <!--<div class="cart-info">-->
+                        <!--<h4><a href="/showGoodDetail">商品名称</a></h4>-->
+                        <!--<span>￥ 60.00</span>-->
+
+                        <!--<p>规格: M</p>-->
+                        <!--</div>-->
+                        <!--<div class="del-icon">-->
+                        <!--<i class="fa fa-times"></i>-->
+                        <!--</div>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; 结算金额&ndash;&gt;-->
+                        <!--<li class="mini-cart-price">-->
+                        <!--<span class="subtotal">结算 : </span>-->
+                        <!--<span class="subtotal-price">￥88.66</span>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; 结算操作&ndash;&gt;-->
+                        <!--<li class="checkout-btn">-->
+                        <!--<a href="#">确定</a>-->
+                        <!--</li>-->
+                        <!--</ul>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--动作状态-->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <!-- 显示搜索结果-->
+                    {{if status=='1'}}
+                    <nav aria-label="breadcrumb">
+                        <div class="breadcrumb-title">搜索结果</div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">搜索结果</li>
+                        </ul>
+                    </nav>
+                    <!-- 显示所有商品-->
+                    {{else}}
+                    <nav aria-label="breadcrumb">
+                        <div class="breadcrumb-title">所有商品</div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">所有商品</li>
+                        </ul>
+                    </nav>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="page-main-wrapper pb-68">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shop-product-wrap ">
+                    <div class="shop-top-bar">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="top-bar-left">
+                                    <div class="product-view-mode mr-70 mr-sm-20">
+                                        <a href="#" data-target="grid"><i class="fa fa-th"></i></a>
+                                        <a class="active" href="#" data-target="list"><i class="fa fa-list"></i></a>
+                                    </div>
+                                     商品数量
+                                    {{if total!==null}}
+                                    <div class="product-amount">
+                                        <p>获取到{{total}}个商品信息</p>
+                                    </div>
+                                    {{else}}
+                                    <div class="product-amount">
+                                        <p>获取到0个商品信息</p>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <!-- 排序方式-->
+                            <!--<div class="col-lg-6 col-md-6">-->
+                                <!--<div class="top-bar-right">-->
+                                    <!--<div class="product-short">-->
+                                        <!--<p>排序方式 : </p>-->
+                                        <!--<select class="nice-select" name="sortby">-->
+                                            <!--<option value="trending">综合</option>-->
+                                            <!--<option value="rating">价格 (低 &gt; 高)</option>-->
+                                            <!--<option value="date">销量 (高&gt;)</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <!-- 商品内容-->
+                    {{each goodInfo value}}
+                    <div class="shop-product-wrap list row">
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <!-- 商品信息·网格形式-->
+                            <div class="product-item text-center">
+                                <!-- 商品图片-->
+                                <div class="product-thumb">
+                                    <a href="/showGoodDetail?goods_id={{value.goods_id}}">
+                                        <img src="/img/product/{{value.pic1}}" alt="This is a picture">
+                                    </a>
+                                </div>
+                                <!-- 商品主体信息-->
+                                <div class="product-content">
+                                    <!--<div class="tag-cate">-->
+                                        <!--<a href="product-details.html">fruit</a>-->
+                                    <!--</div>-->
+                                    <!-- 商品名称-->
+                                    <div class="product-name">
+                                        <a href="/showGoodDetail?goods_id={{value.goods_id}}
+                                        &true_name={{value.true_name}}
+                                        &user_id={{value.user_id}}">{{value.goods_name}}</a>
+                                    </div>
+                                    <!-- 商品价格-->
+                                    <div class="price-box">
+                                        <span class="regular-price">￥{{value.price}}</span>
+                                        <span class="old-price"><del>￥{{value.price*1.2}}</del></span>
+                                    </div>
+                                </div>
+                                <div class="product-hover-content">
+                                    <!-- 商品推荐指数-->
+                                    <!--<div class="product-ratings">-->
+                                        <!--<div class="col-md-6">-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span><i class="icon-star"></i></span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!-- 操作（加入购物车或立即购买或收藏）-->
+                                    <div class="add-to-cart">
+                                        <!-- 加入购物车-->
+                                        <a href="/doAddByCart?goods_id={{value.goods_id}}&price={{value.price}}&quantity=1">
+                                            <img src="/img/product/cart.png" style="height: 25px;width: 25px"/>
+                                        </a>
+                                        <!-- 立即购买-->
+                                        <a href="/doClearingAccount?goods_id={{value.goods_id}}&path=2">
+                                            <img src="img/product/buy.png" style="height: 25px;width: 25px"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 商品信息·单列形式-->
+                            <div class="product-list-item mb-sm-10">
+                                <!-- 商品图片-->
+                                <div class="product-thumb">
+                                    <a href="/showGoodDetail?goods_id={{value.goods_id}}">
+                                        <img src="/img/product/{{value.pic1}}" alt="This is a picture">
+                                    </a>
+                                </div>
+                                <!-- 商品主体信息-->
+                                <div class="product-content">
+                                    <!-- 商品名称-->
+                                    <div class="product-name">
+                                        <a href="/showGoodDetail?goods_id={{value.goods_id}}">{{value.goods_name}}</a>
+                                    </div>
+                                    <!-- 商品推荐指数-->
+                                    <!--<div class="product-ratings">-->
+                                        <!--<span class="good"><i class="icon-star"></i></span>-->
+                                        <!--<span class="good"><i class="icon-star"></i></span>-->
+                                        <!--<span class="good"><i class="icon-star"></i></span>-->
+                                        <!--<span class="good"><i class="icon-star"></i></span>-->
+                                        <!--<span><i class="icon-star"></i></span>-->
+                                    <!--</div>-->
+                                    <!-- 商品描述-->
+                                    <div class="pro-description">
+                                        <p>{{value.goods_words}}</p>
+                                    </div>
+                                    <!-- 商品价格-->
+                                    <div class="price-box pb-20">
+                                        <span class="regular-price">￥{{value.price}}</span>
+                                        <span class="old-price"><del>￥{{value.price*1.2}}</del></span>
+                                    </div>
+                                    <!-- 操作（加入购物车或立即购买或收藏）-->
+                                    <div class="add-to-cart">
+                                        <!-- 加入购物车-->
+                                        <a href="/doAddByCart?goods_id={{value.goods_id}}&price={{value.price}}&quantity=1">
+                                            <img src="/img/product/cart.png" style="height: 25px;width: 25px"/>
+                                        </a>
+                                        <!-- 立即购买-->
+                                        <a href="/doClearingAccount?goods_id={{value.goods_id}}&path=2">
+                                            <img src="img/product/buy.png" style="height: 25px;width: 25px"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+                <!-- 分页-->
+                <div class="paginatoin-area text-center pt-30 mt-30">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="pagination-box">
+                                <li><a href="/showGoodList?currentPage=1" title="First Page">首页</a></li>
+                                <li><a href="/showGoodList?currentPage={{currentPage==1?1:(currentPage-1)}}"
+                                       title="Previous Page">上一页</a></li>
+                                <!--<li><a href="#">1</a></li>-->
+                                <!--<li><a href="#">2</a></li>-->
+                                <!--<li><a href="#">3</a></li>-->
+                                <li><a href="/showGoodList?currentPage={{currentPage==pages?pages:(currentPage+1)}}"
+                                       title="Next Page">下一页 </a></li>
+                                <li><a href="/showGoodList?currentPage={{pages}}" title="Last Page">页末</a></li>
+                                <li><a href="#" title="Last Page">总页数：{{pages}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 页底部-->
+<footer>
+    <!-- footer bottom area start -->
+    <div class="footer-bottom-area bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr pt-20 pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer bottom area end -->
+
+</footer>
+
+
+
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+
+
+
+<!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- Jquery Min Js -->
+<script src="js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper Min Js -->
+<script src="js/vendor/popper.min.js"></script>
+<!-- Bootstrap Min Js -->
+<script src="js/vendor/bootstrap.min.js"></script>
+<!-- Plugins Js-->
+<script src="js/plugins.js"></script>
+<!-- Ajax Mail Js -->
+<script src="js/ajax-mail.js"></script>
+<!-- Active Js -->
+<script src="js/main.js"></script>
+</body>
+
+</html>

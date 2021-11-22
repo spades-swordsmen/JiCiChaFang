@@ -1,0 +1,132 @@
+html,body,div,p,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,button,textarea,iframe,table,th,td{
+    margin:0;
+    padding:0;
+    font-family:microsoft yahei,Tahoma,Helvetica,Arial,SimSun,sans-serif;
+}
+
+body{
+    background:#fff;
+}
+
+li{
+    list-style:none;
+}
+
+.float-l{
+    float:left;
+}
+
+.float-r{
+    float:right;
+}
+
+a,a:hover{
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.m-t-15{
+    margin-top:15px;
+}
+
+button{
+    outline:0!important;
+}
+
+.allocate-row{
+    padding-left:100px;margin-bottom:15px;position:relative;
+}
+
+.allocate_name{
+    position:absolute;
+    left:0;
+    color:#999;
+    width:100px;
+    text-align:right;
+    padding-top:5px;
+}
+
+.allocate_show{
+    background:#f9f9f9;
+    padding-bottom:20px;
+    padding-left:20px;
+}
+
+.allocate_show_title{
+    font-size:14px;
+    height:40px;
+    line-height:40px;
+    margin-bottom:5px;
+}
+
+.allocate_show_para{
+    color:#999;
+    margin-bottom:10px;
+}
+
+.allocate-show-picbox{
+    border:1px solid #ddd;
+    overflow:hidden
+}
+
+.btn-allocate{
+    padding:5px 15px;
+    margin-bottom:10px;
+    margin-right:10px;
+    font-size:12px;
+    display:inline-block;
+}
+
+.btn-allocate:last-child{
+    margin-right:0;
+}
+
+.btn-allocate.btn-tick{
+    background:url(../img/theme-one-bg.png) no-repeat;
+    background-position:right bottom;
+    border:1px solid #048fff;
+    color:#666;
+    border-radius:6px;
+}
+
+.btn-allocate.btn-normal{
+    border-radius:0;
+    border:1px solid #ddd;
+    color:#666;
+}
+
+.btn-allocate.btn-normal:hover{
+    color:#317df4;
+    border:1px solid #317df4
+}
+
+.btn-allocate.btn-normal.active{
+    color:#fff;
+    background:#317df4;
+    border:1px solid #317df4;
+}
+
+.btn-allocate .select-color{
+    background:red;
+    padding:0 7px;
+    margin-right:8px;
+}
+
+.allocate-row .checkbox label{
+    margin-right:10px;
+}
+
+.allocate-row .btn-box{
+    display:inline-block;
+}
+
+.allocate-row .reset-btn{
+    border:1px solid #317df4;
+    color:#317df4
+}
+
+.allocate-row .save-btn{
+    background:#317df4;
+    border:1px solid #317df4;
+    color:#fff
+}

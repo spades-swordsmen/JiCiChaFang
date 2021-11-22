@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <!-- Site title -->
+    <title>季疵茶坊|我的订单</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.icoo" type="image/x-icon"/>
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/simple-line-icons.css" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="css/helper.min.css" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="css/plugins.css" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--页头-->
+<div class="header-menu-area sticky pt-10 pb-10 pt-md-10 pb-md-10 pt-sm-10 pb-sm-10">
+    <div class="container">
+        <div class="header-menu-inner">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-6">
+                    <div class="logo">
+                        <a href="#"><img src="/img/logo/logo.png" alt="brand logo"></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu">
+                        <nav id="mobile-menu">
+                            <ul>
+                                <li class="static">
+                                    <a href="/">首页</a>
+                                </li>
+                                <li>
+                                    <a href="/showGoodList">商品</a>
+                                </li>
+                                <li class="static">
+                                    <a href="/showCollectGood">我的收藏</a>
+                                </li>
+                                <li>
+                                    <a href="/showCart">购物车</a>
+                                </li>
+                                <li>
+                                    <a href="showPersonal">个人中心</a>
+                                </li>
+                                <li class="active">
+                                    <a href="/login">你好!{{true_name}}</a>
+                                </li>
+                                {{if user_id}}
+                                <li>
+                                    <a href="/signOut">退出</a>
+                                </li>
+                                {{/if}}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 面包屑区域 -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        {{if path==1}}
+                        <div class="breadcrumb-title">个人订单</div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/showPersonal">个人中心</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">确认订单</li>
+                        </ul>
+                        {{else}}
+                        <div class="breadcrumb-title">确认订单</div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">首页</a></li>
+                            <li class="breadcrumb-item">立即购买</li>
+                            <li class="breadcrumb-item active" aria-current="page">确认订单</li>
+                        </ul>
+                        {{/if}}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="checkout-page-wrapper pb-68 pt-6 pt-sm-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="checkoutaccordion" id="checkOutAccordion">
+                    <div class="card">
+                        <h3>请在左侧确认收件信息，如若不对，请点击“我要修改”进行修改。
+                            <span data-toggle="collapse" data-target="#logInaccordion">我要修改</span>
+                        </h3>
+
+                        <div id="logInaccordion" class="collapse" data-parent="#checkOutAccordion">
+                            <div class="card-body">
+                                <p>
+                                    如果您以前在我们这里购物，请在下面的框中输入您的详细信息。
+                                    <br/>如果您是新客户，请进入“结算与运输”部分。
+                                </p>
+
+                                <div class="login-reg-form-wrap">
+                                    <div class="row">
+                                        <div class="col-lg-7 m-auto">
+                                            <form action="/doModifyPersonalInfo?user_id={{user_id}}&id=3" method="post">
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+                                                        <div class="single-input-item">
+                                                            <label for="consignee">收件人</label>
+                                                            <input type="text" id="consignee" placeholder="请输入新的收件人"/>
+                                                        </div>
+                                                        <div class="single-input-item">
+                                                            <label for="consignee_phone">收件人联系电话</label>
+                                                            <input type="text" id="consignee_phone"
+                                                                   placeholder="请输入新的收件人联系电话"/>
+                                                        </div>
+                                                        <div class="single-input-item">
+                                                            <label for="consign_address">收件地址</label>
+                                                            <input type="text" id="consign_address"
+                                                                   placeholder="请输入新的收件地址"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <button class="check-btn sqr-btn">确认</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Checkout Login Coupon Accordion End -->
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- 收件信息 -->
+            <div class="col-lg-3">
+                <div class="checkout-billing-details-wrap">
+                    <h2>收件信息</h2>
+
+                    <div class="billing-form-wrap">
+                        <form action="#">
+                            {{each user_info value}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="single-input-item">
+                                        <label>收件人</label>
+                                        <input type="text" value="{{value.consignee}}" readonly/>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <label>收件人联系电话</label>
+                                        <input type="text" value="{{value.consignee_phone}}"
+                                               readonly/>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <label>收件地址</label>
+                                        <input type="text" value="{{value.consign_address}}"
+                                               readonly/>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 订单信息 -->
+            <div class="col-lg-9">
+                <div class="order-summary-details mt-md-46 mt-sm-40">
+                    <h2>订单信息</h2>
+
+                    <form action="/doClearing" method="post">
+                        <div class="order-summary-content mb-sm-4">
+                            {{each good_info value}}
+                            <div class="order-summary-table table-responsive text-center">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr style="background-color: orange">
+                                        <input type="hidden" name="goods_id" value="{{value.goods_id}}">
+                                        <th>商品名</th>
+                                        <input type="hidden" name="goods_name" value="{{value.goods_name}}">
+                                        <th>数量</th>
+                                        {{if path ==2}}
+                                        <input type="hidden" name="goods_number" value="1">
+                                        {{else}}
+                                        <input type="hidden" name="goods_number" value="{{quantity}}">
+                                        {{/if}}
+                                        <th>单价</th>
+                                        <input type="hidden" name="goods_price" value="{{value.price}}">
+                                        <th>类型</th>
+                                        <input type="hidden" name="goods_version" value="{{value.goods_category}}">
+                                        <th>商品总价</th>
+                                        {{if path ==2}}
+                                        <input type="hidden" name="total_price" value="{{value.price}}">
+                                        {{else}}
+                                        <input type="hidden" name="total_price" value="{{totals}}">
+                                        {{/if}}
+                                    </tr>
+                                    </thead>
+                                    {{if path==2}}
+                                    <!-- 其他页面的“立即购买”-->
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="/showGoodDetail?goods_id={{value.goods_id}}">{{value.goods_name}}</a>
+                                        </td>
+                                        <td>1</td>
+                                        <td>￥{{value.price}}</td>
+                                        <td>{{value.goods_category}}</td>
+                                        <td>￥{{value.price}}</td>
+                                    </tr>
+                                    </tbody>
+                                    {{else if path == 1}}
+                                    <!-- 购物车页面的“结算”-->
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="/showGoodDetail?goods_id={{value.goods_id}}">{{value.goods_name}}</a>
+                                        </td>
+                                        <td>{{quantity}}</td>
+                                        <td>￥{{value.price}}</td>
+                                        <td>{{value.goods_category}}</td>
+                                        <td>￥{{totals}}</td>
+                                    </tr>
+                                    </tbody>
+                                    {{else}}
+                                    <!-- 商品详情页面的“立即购买”-->
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="/showGoodDetail?goods_id={{value.goods_id}}">{{value.goods_name}}</a>
+                                        </td>
+                                        <td>{{quantity}}</td>
+                                        <td>￥{{value.price}}</td>
+                                        <td>{{value.goods_category}}</td>
+                                        <td>￥{{totals}}</td>
+                                    </tr>
+                                    </tbody>
+                                    {{/if}}
+                                </table>
+                            </div>
+                            <!-- 配送-->
+                            <div class="single-input-item">
+                                <label for="ordernote">配送:</label>
+
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="freeshipping" name="shipping"
+                                           class="custom-control-input"/>
+                                    <label class="custom-control-label" for="freeshipping">免费配送</label>
+                                </div>
+                            </div>
+                            <!-- 支付金额-->
+                            <div class="single-input-item">
+                                <label for="ordernote">支付金额：</label>
+                                <strong>￥{{value.price}}</strong>
+                            </div>
+                            {{/each}}
+
+                            <div class="single-input-item">
+                                <label for="ordernote">备注:</label>
+                                <textarea name="ordernote" id="ordernote" cols="30" rows="3"
+                                          placeholder="有关您的订单的注释，例如交货特别说明。"></textarea>
+                            </div>
+
+                            <!-- 支付方式 -->
+                            <div class="order-payment-method">
+                                <div class="single-payment-method show">
+                                    <div class="payment-method-name">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="cashon" name="paymentmethod" value="cash"
+                                                   class="custom-control-input" checked/>
+                                            <label class="custom-control-label" for="cashon">支付宝支付</label>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method-details" data-method="cash">
+                                        <p>支付宝支付</p>
+                                    </div>
+                                </div>
+                                <div class="single-payment-method">
+                                    <div class="payment-method-name">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="directbank" name="paymentmethod" value="bank"
+                                                   class="custom-control-input"/>
+                                            <label class="custom-control-label" for="directbank">银行卡支付</label>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method-details" data-method="bank">
+                                        <p>将款项直接存入我们的银行帐户。请使用您的订单ID作为付款参考。在我们的帐户中的资金被清除后，才会下达您的订单。</p>
+                                    </div>
+                                </div>
+                                <div class="single-payment-method">
+                                    <div class="payment-method-name">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="checkpayment" name="paymentmethod" value="check"
+                                                   class="custom-control-input"/>
+                                            <label class="custom-control-label" for="checkpayment">微信支付</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-footer-area">
+                                    <div class="custom-control custom-checkbox mb-30">
+                                        <input type="checkbox" class="custom-control-input" id="terms" required/>
+                                        <label class="custom-control-label" for="terms">我已阅读并同意支付 <a
+                                                href="../index.html">支付即同意季疵茶坊在线付款协议</a></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="check-btn sqr-btn">确认</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- checkout main wrapper end -->
+
+<!--页脚-->
+<footer>
+    <div class="footer-bottom-area bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr pt-20 pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+
+
+<!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- Jquery Min Js -->
+<script src="js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper Min Js -->
+<script src="js/vendor/popper.min.js"></script>
+<!-- Bootstrap Min Js -->
+<script src="js/vendor/bootstrap.min.js"></script>
+<!-- Plugins Js-->
+<script src="js/plugins.js"></script>
+<!-- Ajax Mail Js -->
+<script src="js/ajax-mail.js"></script>
+<!-- Active Js -->
+<script src="js/main.js"></script>
+
+</body>
+
+</html>

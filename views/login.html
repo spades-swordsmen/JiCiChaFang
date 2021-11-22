@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <!-- Site title -->
+    <title>季疵茶坊 | 登录</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.icoo" type="image/x-icon"/>
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/simple-line-icons.css" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="/css/helper.min.css" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="/css/plugins.css" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--页头-->
+<div class="header-menu-area sticky pt-10 pb-10 pt-md-10 pb-md-10 pt-sm-10 pb-sm-10">
+    <div class="container">
+        <div class="header-menu-inner">
+            <div class="row align-items-center">
+                <!-- 头部·左侧（网站logo）-->
+                <div class="col-lg-2 col-6">
+                    <div class="logo">
+                        <a href="#"><img src="/img/logo/logo.png" alt="brand logo"></a>
+                    </div>
+                </div>
+                <!--头部·中部（导航栏）-->
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu">
+                        <nav id="mobile-menu">
+                            <ul>
+                                <li class="active">
+                                    <a href="/">首页</a>
+                                </li>
+                                <li>
+                                    <a href="/showGoodList">商品</a>
+                                </li>
+                                <li>
+                                    <a href="/showCollectGood">我的收藏</a>
+                                </li>
+                                <li>
+                                    <a href="/showCart">购物车</a>
+                                </li>
+                                <li>
+                                    <a href="/showPersonal">个人中心</a>
+                                </li>
+                                <li>
+                                    <a href="#">你好!{{true_name}}</a>
+                                </li>
+                                {{if user_id}}
+                                <li>
+                                    <a href="/signOut">退出</a>
+                                </li>
+                                {{/if}}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- 头部·右侧（搜索框和购物车商品数量显示）-->
+                <div class="col-lg-2 col-6">
+                    <div class="header-cart-option">
+                        <!--搜索框-->
+                        <div class="header-search">
+                            <!-- 搜索图标-->
+                            <div class="header-search-btn">
+                                <i class="icon-magnifier"></i>
+                            </div>
+                            <!-- 搜索栏-->
+                            <div class="search-box">
+                                <form action="/doSearchGoods" method="post">
+                                    <input type="text" name="goods_name" placeholder="看看有些啥？">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- 购物车商品数量的显示-->
+                        <!--<div class="cart-toggler">-->
+                        <!--&lt;!&ndash; 已选择商品数 &ndash;&gt;-->
+                        <!--<div class="cart-toggler-icon">-->
+                        <!--<button>-->
+                        <!--<i class="icon-handbag"></i>-->
+                        <!--<span class="add-qunatity">1</span>-->
+                        <!--</button>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; 购物车中商品显示&ndash;&gt;-->
+                        <!--<ul class="cart-list">-->
+                        <!--&lt;!&ndash; 商品信息&ndash;&gt;-->
+                        <!--<li id="goodInfo">-->
+                        <!--<div class="cart-img">-->
+                        <!--<a href="/showGoodDetail"><img src="/img/cart/cart-1.jpg" alt=""></a>-->
+                        <!--<span class="cart-quantity">2x &lt;!&ndash; 加入购物车商品的数目 &ndash;&gt;</span>-->
+                        <!--</div>-->
+                        <!--<div class="cart-info">-->
+                        <!--<h4><a href="/showGoodDetail">商品名称</a></h4>-->
+                        <!--<span>￥ 60.00</span>-->
+
+                        <!--<p>规格: M</p>-->
+                        <!--</div>-->
+                        <!--<div class="del-icon">-->
+                        <!--<i class="fa fa-times"></i>-->
+                        <!--</div>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; 结算金额&ndash;&gt;-->
+                        <!--<li class="mini-cart-price">-->
+                        <!--<span class="subtotal">结算 : </span>-->
+                        <!--<span class="subtotal-price">￥88.66</span>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; 结算操作&ndash;&gt;-->
+                        <!--<li class="checkout-btn">-->
+                        <!--<a href="#">确定</a>-->
+                        <!--</li>-->
+                        <!--</ul>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- breadcrumb area start -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <div class="breadcrumb-title">登录</div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">登录</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb area end -->
+
+<!-- login register wrapper start -->
+<div class="login-register-wrapper pt-32  pb-68 pt-sm-50">
+    <div class="container">
+        <div class="member-area-from-wrap">
+            <div class="row">
+                <!-- Login Content Start -->
+                <div class="col-lg-6 m-auto">
+                    <div class="login-reg-form-wrap  pr-lg-50">
+                        <h2>登录</h2>
+                        <form action="/doLogin" method="post">
+                            <div class="single-input-item">
+                                <input type="text" name="account" placeholder="请输入账号" required/>
+                            </div>
+                            <div class="single-input-item">
+                                <input type="password" name="password" placeholder="请输入密码" required/>
+                            </div>
+                            <div class="single-input-item">
+                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                    <div class="remember-meta">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                            <label class="custom-control-label" for="rememberMe">记住密码</label>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="forget-pwd">忘记密码?</a>
+                                </div>
+                            </div>
+                            <div class="single-input-item">
+                                <div class="login-reg-form-meta  align-items-center justify-content-between">
+                                    <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                        <button type="submit" class="sqr-btn center">点击登录</button>
+                                    </div>
+                                    <a href="/register" class="goRegist">没有账号？先去注册吧</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--页脚-->
+<footer>
+    <div class="footer-bottom-area bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr pt-20 pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+
+<!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- Jquery Min Js -->
+<script src="js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper Min Js -->
+<script src="js/vendor/popper.min.js"></script>
+<!-- Bootstrap Min Js -->
+<script src="js/vendor/bootstrap.min.js"></script>
+<!-- Plugins Js-->
+<script src="js/plugins.js"></script>
+<!-- Ajax Mail Js -->
+<script src="js/ajax-mail.js"></script>
+<!-- Active Js -->
+<script src="js/main.js"></script>
+</body>
+
+</html>

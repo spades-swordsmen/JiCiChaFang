@@ -1,0 +1,605 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <!-- Site title -->
+    <title>季疵茶坊|首页</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.icoo" type="image/x-icon"/>
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/simple-line-icons.css" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="/css/helper.min.css" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="/css/plugins.css" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!--页头-->
+<div class="header-menu-area sticky pt-10 pb-10 pt-md-10 pb-md-10 pt-sm-10 pb-sm-10">
+    <div class="container">
+        <div class="header-menu-inner">
+            <div class="row align-items-center">
+                <!-- 头部·左侧（网站logo）-->
+                <div class="col-lg-2 col-6">
+                    <div class="logo">
+                        <a href="#"><img src="/img/logo/logo.png" alt="brand logo"></a>
+                    </div>
+                </div>
+                <!--头部·中部（导航栏）-->
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu">
+                        <nav id="mobile-menu">
+                            <ul>
+                                <li class="active">
+                                    <a href="#">首页</a>
+                                </li>
+                                <li>
+                                    <a href="/showGoodList">商品</a>
+                                </li>
+                                <li>
+                                    <a href="/showCollectGood">我的收藏</a>
+                                </li>
+                                <li>
+                                    <a href="/showCart">购物车</a>
+                                </li>
+                                <li>
+                                    <a href="/showPersonal">个人中心</a>
+                                </li>
+                                <li>
+                                    <a href="/login">你好!{{true_name}}</a>
+                                </li>
+                                {{if user_id}}
+                                <li>
+                                    <a href="/signOut">退出</a>
+                                </li>
+                                {{/if}}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- 头部·右侧（搜索框和购物车商品数量显示）-->
+                <div class="col-lg-2 col-6">
+                    <div class="header-cart-option">
+                        <!--搜索框-->
+                        <div class="header-search">
+                            <!-- 搜索图标-->
+                            <div class="header-search-btn">
+                                <i class="icon-magnifier"></i>
+                            </div>
+                            <!-- 搜索栏-->
+                            <div class="search-box">
+                                <form action="/doSearchGoods" method="post">
+                                    <input type="text" name="goods_name" placeholder="看看有些啥？">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- 购物车商品数量的显示-->
+                        <!--<div class="cart-toggler">-->
+                        <!--&lt;!&ndash; 已选择商品数 &ndash;&gt;-->
+                        <!--<div class="cart-toggler-icon">-->
+                        <!--<button>-->
+                        <!--<i class="icon-handbag"></i>-->
+                        <!--<span class="add-qunatity">1</span>-->
+                        <!--</button>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; 购物车中商品显示&ndash;&gt;-->
+                        <!--<ul class="cart-list">-->
+                        <!--&lt;!&ndash; 商品信息&ndash;&gt;-->
+                        <!--<li id="goodInfo">-->
+                        <!--<div class="cart-img">-->
+                        <!--<a href="/showGoodDetail"><img src="/img/cart/cart-1.jpg" alt=""></a>-->
+                        <!--<span class="cart-quantity">2x &lt;!&ndash; 加入购物车商品的数目 &ndash;&gt;</span>-->
+                        <!--</div>-->
+                        <!--<div class="cart-info">-->
+                        <!--<h4><a href="/showGoodDetail">商品名称</a></h4>-->
+                        <!--<span>￥ 60.00</span>-->
+
+                        <!--<p>规格: M</p>-->
+                        <!--</div>-->
+                        <!--<div class="del-icon">-->
+                        <!--<i class="fa fa-times"></i>-->
+                        <!--</div>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; 结算金额&ndash;&gt;-->
+                        <!--<li class="mini-cart-price">-->
+                        <!--<span class="subtotal">结算 : </span>-->
+                        <!--<span class="subtotal-price">￥88.66</span>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; 结算操作&ndash;&gt;-->
+                        <!--<li class="checkout-btn">-->
+                        <!--<a href="#">确定</a>-->
+                        <!--</li>-->
+                        <!--</ul>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--礼盒专区-->
+<div class="oagni-daily-deals pb-68 pt-sm-50 pb-sm-50">
+    <div class="deals-arrows"></div>
+    <div class="container">
+        <div class="row"><!-- 正宗五年陈    -->
+            <div class="col-12">
+                <div class="section-title daily-deals-title mb-40">
+                    <span>礼盒专区</span>
+
+                    <h2></h2>
+                    <img src="img/icons/deal_title_icon.png" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- section title end -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="daily-deals-carousel">
+                    {{each goodInfo value}}
+                    <div class="deals-single-item">
+                        <div class="deals-item text-center">
+                            <!-- 商品图片-->
+                            <div class="product-thumb">
+                                <a href="/showGoodDetail?goods_id={{value.goods_id}}">
+                                    <img src="img/product/{{value.pic1}}" alt="">
+                                </a>
+                            </div>
+                            <!-- 商品主体信息-->
+                            <div class="deal-content text-center mt-md-30 mt-sm-30">
+                                <div class="section-title d-none d-lg-block">
+                                    <span>{{value.goods_title}}</span>
+
+                                    <h2>{{value.goods_category}}</h2>
+                                    <img src="img/icons/deal_title_icon.png" alt="">
+                                </div>
+                                <div class="product-content">
+                                    <!--<div class="tag-cate">-->
+                                    <!--<a href="product-details.html">茶叶</a>-->
+                                    <!--</div>-->
+                                    <!-- 商品名-->
+                                    <div class="product-name">
+                                        <a href="/showGoodDetail?goods_id={{value.goods_id}}">{{value.goods_name}}</a>
+                                    </div>
+                                    <!--<div class="deal-ratings">-->
+                                    <!--<span class="good"><i class="icon-star"></i></span>-->
+                                    <!--<span class="good"><i class="icon-star"></i></span>-->
+                                    <!--<span class="good"><i class="icon-star"></i></span>-->
+                                    <!--<span class="good"><i class="icon-star"></i></span>-->
+                                    <!--<span><i class="icon-star"></i></span>-->
+                                    <!--</div>-->
+                                    <!-- 价格-->
+                                    <div class="price-box">
+                                        <span class="regular-price">￥{{value.price}}</span>
+                                        <span class="old-price"><del>￥{{value.price*1.2}}</del></span>
+                                    </div>
+                                    <!-- 描述-->
+                                    <div class="deals-details">
+                                        <p>{{value.goods_words}}</p>
+                                    </div>
+                                    <!-- 操作-->
+                                    <a href="/doClearingAccount?goods_id={{value.goods_id}}&path=2" class="shop-btn">立即抢购</a>
+                                    <a href="/doAddByCart?goods_id={{value.goods_id}}&quantity=1&price={{value.price}}" class="shop-btn">加入购物车</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    <!--<div class="deals-single-item">
+                        <div class="deals-item text-center">
+                            <div class="product-thumb">
+                                <a href="product-details.html"><img src="img/product/product-img10.jpg" alt=""></a>
+                            </div>
+                            <div class="deal-content text-center mt-md-30 mt-sm-30">
+                                <div class="section-title d-none d-lg-block">
+                                    <span>正宗五年陈</span>
+
+                                    <h2>普洱茶</h2>
+                                    <img src="img/icons/deal_title_icon.png" alt="">
+                                </div>
+                                <div class="product-content">
+                                    <div class="tag-cate">
+                                        <a href="product-details.html">茶叶</a>
+                                    </div>
+                                    <div class="product-name">
+                                        <a href="product-details.html">正宗季疵茶坊仁字礼盒套装</a>
+                                    </div>
+                                    <div class="deal-ratings">
+                                        <span class="good"><i class="icon-star"></i></span>
+                                        <span class="good"><i class="icon-star"></i></span>
+                                        <span class="good"><i class="icon-star"></i></span>
+                                        <span class="good"><i class="icon-star"></i></span>
+                                        <span><i class="icon-star"></i></span>
+                                    </div>
+                                    <div class="price-box">
+                                        <span class="regular-price">￥136.00</span>
+                                        <span class="old-price"><del>￥199.00</del></span>
+                                    </div>
+                                    <div class="deals-details">
+                                        <p>
+                                            普洱茶最主要的就是原料，工艺以及后期的存储，普洱茶最主要的就是杀青的工艺，茶香以及后期的存储转化的好不好，都跟杀青的手艺有很大的关系，杀青杀得要恰到好处，炒的轻香气出不来，炒的重后期转化空间小。</p>
+                                    </div>
+                                    <a href="user/cart.html" class="shop-btn">立即抢购</a>
+                                </div>
+                            </div>
+                        </div>
+                        &lt;!&ndash; end single item &ndash;&gt;
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--头部-->
+<header>
+    <!-- 优惠券区域 -->
+    <div class="deal-banner-area pb-xs-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="img-container fix img-full mb-xs-30">
+                        <a href="#"><img src="img/banner/1_9.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="img-container fix img-full mb-xs-30">
+                        <a href="#"><img src="img/banner/1_9.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="img-container fix img-full mb-xs-30">
+                        <a href="#"><img src="img/banner/1_9.jpg" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="img-container fix img-full mb-xs-30">
+                        <a href="#"><img src="img/banner/1_9.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 好物推荐区域-->
+
+    <div class="product-trend-area pt-96 pt-sm-62">
+        <div class="container-fluid">
+            <!-- “好物推荐”字体区域-->
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title mb-40">
+                        <span>好物推荐</span>
+
+                        <h2>热卖中</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- “好物推荐”商品区域-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="trend-main-wrapper">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="tab_one">
+                                <div class="product-tab-carousel slick-arrow-style">
+                                    {{each goodInfo value}}
+                                    <div class="product-item text-center">
+                                        <!-- 商品图片-->
+                                        <div class="product-thumb">
+                                            <a href="/showGoodDetail?goods_id={{value.goods_id}}">
+                                                <img src="img/product/{{value.pic1}}" alt="">
+                                            </a>
+                                        </div>
+                                        <!-- 商品主体信息-->
+                                        <div class="product-content">
+                                            <!-- 重量-->
+                                            <div class="tag-cate">
+                                                <a href="#">{{value.specification}}</a>
+                                            </div>
+                                            <!-- 商品名-->
+                                            <div class="product-name">
+                                                <a href="#">{{value.goods_name}}</a>
+                                            </div>
+                                            <!-- 价格-->
+                                            <div class="price-box">
+                                                <span class="regular-price">￥{{value.price}}</span>
+                                                <span class="old-price"><del>￥{{value.price*1.5}}</del></span>
+                                            </div>
+                                        </div>
+                                        <div class="product-hover-content">
+                                            <!-- 商品星级-->
+                                            <!--<div class="product-ratings">-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span class="good"><i class="icon-star"></i></span>-->
+                                            <!--<span><i class="icon-star"></i></span>-->
+                                            <!--</div>-->
+                                            <div class="add-to-cart">
+                                                <!-- 加入购物车-->
+                                                <a href="/doAddByCart?goods_id={{value.goods_id}}">
+                                                    <img src="img/product/cart.png" style="height: 25px;width: 25px"/>
+                                                </a>
+                                                <!-- 立即购买-->
+                                                <a href="/doClearingAccount?goods_id={{value.goods_id}}&path=2">
+                                                    <img src="img/product/buy.png" style="height: 25px;width: 25px"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 三列商品区域(暂不渲染)-->
+    <div class="categories-area hm-3 pt-70 pt-sm-30">
+        <div class="container">
+            <div class="row">
+                <!-- 特色商品-->
+                <div class="col-lg-4 col-md-4">
+                    <div class="featured-title text-center mb-50 mb-sm-30 mt-sm-20">
+                        <h3>特色商品</h3>
+                    </div>
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                </div>
+                <!-- 热销商品-->
+                <div class="col-lg-4 col-md-4">
+                    <div class="best-seller-title text-center mb-50 mb-sm-30 mt-sm-20">
+                        <h3>热销商品</h3>
+                    </div>
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                </div>
+                <!-- 新品-->
+                <div class="col-lg-4 col-md-4">
+                    <div class="arrivals-title text-center mb-50 mb-sm-30 mt-sm-20">
+                        <h3>新品</h3>
+                    </div>
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                    <div class="seller-content mb-14 pb-14">
+                        <div class="seller-thumb">
+                            <a href="product-details.html">
+                                <img src="img/product/product-img5.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="seller-des">
+                            <div class="tag-cate">
+                                <a href="product-details.html">387g</a>
+                            </div>
+                            <div class="product-name">
+                                <a href="product-details.html">商品名称</a>
+                            </div>
+                            <div class="price-box">
+                                <span class="regular-price">$65.00</span>
+                                <span class="old-price"><del>$75.00</del></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single item -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<!-- 页底部-->
+<footer>
+    <div class="footer-bottom-area bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr pt-20 pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+
+
+<!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- Jquery Min Js -->
+<script src="js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper Min Js -->
+<script src="js/vendor/popper.min.js"></script>
+<!-- Bootstrap Min Js -->
+<script src="js/vendor/bootstrap.min.js"></script>
+<!-- Plugins Js-->
+<script src="js/plugins.js"></script>
+<!-- Ajax Mail Js -->
+<script src="js/ajax-mail.js"></script>
+<!-- Active Js -->
+<script src="js/main.js"></script>
+</body>
+
+</html>

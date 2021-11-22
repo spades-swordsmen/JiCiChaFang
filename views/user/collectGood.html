@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <!-- Site title -->
+    <title>季疵茶坊|我的收藏</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.icoo" type="image/x-icon"/>
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/simple-line-icons.css" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="/css/helper.min.css" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="/css/plugins.css" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+<div class="header-menu-area sticky pt-10 pb-10 pt-md-10 pb-md-10 pt-sm-10 pb-sm-10">
+    <div class="container">
+        <div class="header-menu-inner">
+            <div class="row align-items-center">
+                <!-- 头部·左侧（网站logo）-->
+                <div class="col-lg-2 col-6">
+                    <div class="logo">
+                        <a href="#"><img src="/img/logo/logo.png" alt="brand logo"></a>
+                    </div>
+                </div>
+                <!--头部·中部（导航栏）-->
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu">
+                        <nav id="mobile-menu">
+                            <ul>
+                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                <li>
+                                    <a href="/showGoodList">商品</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">我的收藏</a>
+                                </li>
+                                <li>
+                                    <a href="/showCart">购物车</a>
+                                </li>
+                                <li>
+                                    <a href="/showPersonal">个人中心</a>
+                                </li>
+                                <li>
+                                    <a href="/login">你好!{{true_name}}</a>
+                                </li>
+                                {{if user_id}}
+                                <li>
+                                    <a href="/signOut">退出</a>
+                                </li>
+                                {{/if}}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- 头部·右侧（搜索框和购物车商品数量显示）-->
+                <div class="col-lg-2 col-6">
+                    <div class="header-cart-option">
+                        <!--搜索框-->
+                        <div class="header-search">
+                            <!-- 搜索图标-->
+                            <div class="header-search-btn">
+                                <i class="icon-magnifier"></i>
+                            </div>
+                            <!-- 搜索栏-->
+                            <div class="search-box">
+                                <form action="/doSearchGoods" method="post">
+                                    <input type="text" name="goods_name" placeholder="看看有些啥？">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--收藏的商品-->
+<div class="wishlist-main-wrapper pb-34 pb-6 pt-sm-50  mb-sm-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- 商品数量显示-->
+                <div class="shop-top-bar">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="top-bar-left">
+                                <div class="product-view-mode mr-70 mr-sm-20">
+                                    <a href="#" data-target="grid"><i class="fa fa-th"></i></a>
+                                    <a class="active" href="#" data-target="list"><i class="fa fa-list"></i></a>
+                                </div>
+                                商品数量
+                                {{if total!==null}}
+                                <div class="product-amount">
+                                    <p>获取到{{total}}个商品信息</p>
+                                </div>
+                                {{else}}
+                                <div class="product-amount">
+                                    <p>获取到0个商品信息</p>
+                                </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 收藏表内容-->
+                <div class="cart-table table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="pro-thumbnail" colspan="2">商品</th>
+                            <th class="pro-price">价格</th>
+                            <th class="pro-quantity">货物状态</th>
+                            <th class="pro-quantity" colspan="3">操作</th>
+                        </tr>
+                        </thead>
+                        {{each collectInfo value}}
+                        <tbody>
+                        <tr>
+                            <td class="pro-thumbnail">
+                                <a href="/showGoodDetail?goods_id={{value.goods_id}}">
+                                    <img class="img-fluid" src="/img/product/{{value.pic}}" alt="Product"/>
+                                </a>
+                            </td>
+                            <td class="pro-title">
+                                <a href="/showGoodDetail?goods_id={{value.goods_id}}">{{value.goods_name}}</a>
+                            </td>
+                            <td class="pro-price">
+                                <span>￥{{value.price}}</span>
+                            </td>
+                            <!-- 商品状态-->
+                            {{if good_status=="2"}}
+                            <td class="pro-quantity">
+                                <span class="text-success">现货</span>
+                            </td>
+                            {{else}}
+                            <td class="pro-quantity">
+                                <span class="text-success">下架</span>
+                            </td>
+                            {{/if}}
+                            {{if good_status=="2"}}
+                            <!-- 立即购买-->
+                            <td class="pro-subtotal">
+                                <a href="/doClearingAccount?goods_id={{value.goods_id}}&path=2">
+                                    <img src="img/product/buy.png" style="height: 25px;width: 25px"/>立即购买
+                                </a>
+                            </td>
+                            <!-- 加入购物车-->
+                            <td class="pro-subtotal">
+                                <a href="/doAddByCart?goods_id={{value.goods_id}}&quantity=1&price={{value.price}}">
+                                    <img src="/img/product/cart.png" style="height: 25px;width: 25px"/>加入购物车
+                                </a>
+                            </td>
+                            {{else}}
+                            <td class="pro-subtotal">
+                                <p style="color: red">商品已下架！</p>
+                            </td>
+                            <td class="pro-subtotal">
+                                <p style="color: red">商品已下架！</p>
+                            </td>
+                            {{/if}}
+                            <!-- 取消收藏-->
+                            <td class="pro-remove">
+                                <a href="/doCollectGood?goods_id={{value.goods_id}}">
+                                    <img src="img/product/collected.png" style="height: 25px;width: 25px"/>取消收藏
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {{/each}}
+                    </table>
+                </div>
+                <!-- 分页-->
+                <div class="paginatoin-area text-center pt-30 mt-30">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="pagination-box">
+                                <li><a href="/showCollectGood?currentPage=1" title="First Page">首页</a></li>
+                                <li><a href="/showCollectGood?currentPage={{currentPage==1?1:(currentPage-1)}}"
+                                       title="Previous Page">上一页</a></li>
+                                <!--<li><a href="#">1</a></li>-->
+                                <!--<li><a href="#">2</a></li>-->
+                                <!--<li><a href="#">3</a></li>-->
+                                <li><a href="/showCollectGood?currentPage={{currentPage==pages?pages:(currentPage+1)}}"
+                                       title="Next Page">下一页 </a></li>
+                                <li><a href="/showCollectGood?currentPage={{pages}}" title="Last Page">页末</a></li>
+                                <li><a href="#" title="Last Page">总页数：{{pages}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wishlist Page Content End -->
+    </div>
+</div>
+<!-- wishlist main wrapper end -->
+
+<!--页脚-->
+<footer>
+    <div class="footer-bottom-area mt-20 bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr  pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+
+
+<!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+<script src="/js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- Jquery Min Js -->
+<script src="/js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper Min Js -->
+<script src="/js/vendor/popper.min.js"></script>
+<!-- Bootstrap Min Js -->
+<script src="/js/vendor/bootstrap.min.js"></script>
+<!-- Plugins Js-->
+<script src="/js/plugins.js"></script>
+<!-- Ajax Mail Js -->
+<script src="/js/ajax-mail.js"></script>
+<!-- Active Js -->
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>

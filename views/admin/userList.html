@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>季疵茶坊|用户信息管理</title>
+    <link rel="stylesheet" href="/css/admin_css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/invalid.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/admin_js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/js/admin_js/simpla.jquery.configuration.js"></script>
+    <script type="text/javascript" src="/js/admin_js/facebox.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.wysiwyg.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.datePicker.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.date.js"></script>
+    <script type="text/javascript">
+        function del(obj) {//删除
+            var tr = obj.parentElement.parentElement;
+            tr.parentElement.removeChild(tr);//在tr的父节点的子列表中删除某个子元素，即删除tr
+        }
+
+        function mod(obj) {//修改
+            var val = obj.value;
+            var tr = obj.parentElement.parentElement;
+            var col = tr.cells[1];//数量单元格
+            if (val == "修改") {
+                obj.value = "确定";
+                var number = col.innerHTML;
+                //col.innerText="<input type='text' value='"+number+"'>";//此处将“修改”改为了普通文本
+                col.innerHTML = "<input type='text' value='" + number + "'>";//此处将“修改”改为了HTML文本，并且简化了代码量
+                /*尽量减少使用核心DOM的使用,使用HTMLDOM
+
+                 */
+            } else if (val == "确定") {
+                obj.value = "修改";
+                var number = col.firstElementChild.value;
+                col.innerHTML = number;
+            }
+
+        }
+
+        function add() {//增加订单
+            var pname = prompt("商品名称：");
+            var number = prompt("数量：");
+            var price = prompt("价格：");
+            var tbody = document.querySelector("tbody");
+            var tr = document.createElement("tr");
+            var html = "";
+            html += "<td>" + pname + "</td>";
+            html += "<td>" + number + "</td>";
+            html += "<td>" + price + "</td>";
+            html += "<td>";
+            html += "<input type='button' value='删除' onclick='del(this)'>";
+            html += "<input type='button' value='修改' onclick='mod(this)'>";
+            html += "</td>";
+            tr.innerHTML = html;
+            tbody.appendChild(tr);
+
+        }
+    </script>
+
+</head>
+<body>
+<div id="body-wrapper">
+    <div id="sidebar">
+        <div id="sidebar-wrapper">
+            <h1 id="sidebar-title">
+                <a href="#">季疵茶坊</a>
+            </h1>
+            <a href="#">
+                <img id="logo" src="/img/logo/logo.png" alt=""/>
+            </a>
+
+            <div id="profile-links"> 你好,
+                <a href="#" title="Edit your profile">管理员：{{true_name}}</a>
+                <br/>
+                <br/>
+                <a href="/" title="View the Site" class=" current">查看网站</a> |
+                <a href="/signOut" title="Sign Out">退出</a>
+            </div>
+
+            <!--选项栏-->
+            <ul id="main-nav">
+                <li>
+                    <a href="#" class="nav-top-item current">用户信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="#"  class="current">查看用户信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item">商品信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminGood/showGoodList?true_name={{true_name}}">查看商品信息</a>
+                        </li>
+                        <li>
+                            <a href="/adminGood/addGood">新增商品</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-top-item ">订单信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminOrder/showOrderList?true_name={{true_name}}">查看订单信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item">评论信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminComment/showCommentList?true_name={{true_name}}">查看用户评论</a>
+                        </li>
+                    </ul>
+                </li>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <noscript>
+            <div class="notification error png_bg"></div>
+        </noscript>
+
+        <h2>欢迎，管理员！</h2>
+
+        <p id="page-intro">你想做些什么？</p>
+
+        <div class="clear"></div>
+        <div class="content-box">
+            <div class="content-box-header">
+                <h3>信息详情</h3>
+                <ul class="content-box-tabs">
+                    <li><a href="#tab1" class="default-tab">表</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="content-box-content">
+                <div class="tab-content default-tab" id="tab1">
+                    <div class="notification attention png_bg">
+                        <a href="#" class="close">
+                            <img src="/images/icons/cross_grey_small.png" title="Close this notification"
+                                 alt="close"/>
+                        </a>
+
+                        <p style="text-align: center;">这是一个用户信息列表</p>
+                    </div>
+                    <div>
+                        <form action="/adminUser/doSearchUser?true_name={{true_name}}" method="post">
+                            <input type="text" name="searchName" id="searchName" class="form" placeholder="请输入用户的真实姓名">
+                            &ndash;
+                            <button type="submit" class="btn btn-success" name="searchUser" id="searchUser">点击搜索</button>
+                        </form>
+                    </div>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>用户昵称</td>
+                            <td>真实姓名</td>
+                            <td>性别</td>
+                            <td>身份证号</td>
+                            <td>电话号码</td>
+                            <td>账号</td>
+                            <td>密码</td>
+                            <td>收件地址</td>
+                            <td>用户等级</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+
+                        {{each data value}}
+                        <tbody>
+                        <tr>
+                            <td>{{value.user_id}}</td>
+                            <td>{{value.nickname}}</td>
+                            <td>{{value.true_name}}</td>
+                            <td>{{value.gender}}</td>
+                            <td>{{value.id_card}}</td>
+                            <td>{{value.phone}}</td>
+                            <td>{{value.account}}</td>
+                            <td>{{value.password}}</td>
+                            <td>{{value.consignee}}</td>
+                            <td>{{value.rank}}</td>
+                            <td>
+                                <button class="btn btn-success">
+                                    <a href="/adminUser/showUserOne?user_id={{value.user_id}}&true_name={{true_name}}">修改</a>
+                                </button>
+                                <button class="btn btn-success">
+                                    <a href="javascript:if(confirm('确认是否要删除该用户?')){location.href='/adminUser/doDeleteUser?user_id={{value.user_id}}'}">删除</a>
+                                </button>
+                            </td>
+                            {{/each}}
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="6">
+                                <div class="pagination">
+                                    <a href="#">信息条数：{{total}} </a>
+                                    <a href="/adminOrder/showOrderList?currentPage=1" title="First Page">首页</a>
+                                    <a href="/adminOrder/showOrderList?currentPage={{currentPage==1?1:(currentPage-1)}}"
+                                       title="Previous Page">上一页</a>
+                                    <!--<a href="#" class="number current" title="1">1</a>-->
+                                    <!--<a href="#" class="number" title="2">2</a>-->
+                                    <!--<a href="#" class="number" title="3">3</a>-->
+                                    <!--<a href="#" class="number" title="4">4</a>-->
+                                    <a href="/adminOrder/showOrderList?currentPage={{currentPage==pages?pages:(currentPage+1)}}"
+                                       title="Next Page">下一页 </a>
+                                    <a href="/adminOrder/showOrderList?currentPage={{pages}}" title="Last Page">页末 </a>
+                                    <a href="#">当前页数：{{currentPage}}/{{pages}}</a>
+                                    <a href="#">总页数：{{pages}}</a>
+                                </div>
+                                <div class="clear"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

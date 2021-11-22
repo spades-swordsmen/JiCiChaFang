@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <!-- Site title -->
+    <title>季疵茶坊|个人中心</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.icoo" type="image/x-icon"/>
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/simple-line-icons.css" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="/css/helper.min.css" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="/css/plugins.css" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!--页头-->
+<div class="header-menu-area sticky pt-10 pb-10 pt-md-10 pb-md-10 pt-sm-10 pb-sm-10">
+    <div class="container">
+        <div class="header-menu-inner">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-6">
+                    <div class="logo">
+                        <a href="#"><img src="/img/logo/logo.png" alt="brand logo"></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu">
+                        <nav id="mobile-menu">
+                            <ul>
+                                <li class="static">
+                                    <a href="/">首页</a>
+                                </li>
+                                <li >
+                                    <a href="/showGoodList">商品</a>
+                                </li>
+                                <li class="static">
+                                    <a href="/showCollectGood">我的收藏</a>
+                                </li>
+                                <li>
+                                    <a href="/showCart">购物车</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">个人中心</a>
+                                </li>
+                                <li>
+                                    <a href="/login">你好!{{true_name}}</a>
+                                </li>
+                                {{if user_id}}
+                                <li>
+                                    <a href="/signOut">退出</a>
+                                </li>
+                                {{/if}}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!-- 头部·右侧（搜索框和购物车商品数量显示）-->
+                <div class="col-lg-2 col-6">
+                    <div class="header-cart-option">
+                        <!--搜索框-->
+                        <div class="header-search">
+                            <!-- 搜索图标-->
+                            <div class="header-search-btn">
+                                <i class="icon-magnifier"></i>
+                            </div>
+                            <!-- 搜索栏-->
+                            <div class="search-box">
+                                <form action="/doSearchGoods?account={{account}}&user_id={{user_id}}" method="post">
+                                    <input type="text" name="goods_name" placeholder="看看有些啥？">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 d-block d-lg-none">
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--面包屑区域（动作）-->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap">
+                    <nav aria-label="breadcrumb">
+                        <div class="breadcrumb-title">个人中心</div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">个人中心</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 主要内容-->
+<div class="my-account-wrapper pt-6 pb-68 pt-sm-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="myaccount-page-wrapper">
+                    <div class="row">
+                        <!-- 左侧标签栏-->
+                        <div class="col-lg-3 col-md-4">
+                            <div class="myaccount-tab-menu nav" role="tablist">
+                                <a href="#dashboard" class="active" data-toggle="tab">
+                                    <i class="fa fa-dashboard"></i>欢迎回来
+                                </a>
+                                <a href="#personal_info" data-toggle="tab">
+                                    <i class="fa fa-user"></i>我的信息
+                                </a>
+                                <a href="#personal_order" data-toggle="tab">
+                                    <i class="fa fa-cart-arrow-down"></i>我的订单
+                                </a>
+                                <a href="#personal_comment" data-toggle="tab">
+                                    <i class="fa fa-credit-card"></i>我的评论
+                                </a>
+                                <a href="#personal_address" data-toggle="tab">
+                                    <i class="fa fa-map-marker"></i>我的地址
+                                </a>
+                                <a href="/singOut">
+                                    <i class="fa fa-sign-out"></i>退出登录
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 右侧标签内容-->
+                        <div class="col-lg-9 col-md-8">
+                            <div class="tab-content" id="myaccountContent">
+
+                                <!-- 初始默认栏-->
+                                <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <div class="welcome">
+                                            <p>您好, <strong>{{true_name}}</strong>！</p>
+                                        </div>
+                                        <p class="mb-0">您可以轻松地查看您最近的订单以及对商品的评价，管理您的个人信息。</p>
+                                    </div>
+                                </div>
+
+                                <!-- 我的信息 -->
+                                <div class="tab-pane fade" id="personal_info" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <h3>个人资料</h3>
+                                        {{each user_info value}}
+                                        <div class="account-details-form">
+                                            <form action="/doModifyPersonalInfo?user_id={{value.user_id}}&id=1"
+                                                  method="post">
+                                                <div class="single-input-item">
+                                                    <label for="account" class="required">账号</label>
+                                                    <input type="text" id="account" value="{{value.account}}" readonly/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <label for="nickname" class="required">昵称</label>
+                                                    <input type="text" id="nickname" name="nickname"
+                                                           placeholder="请输入新的昵称" value="{{value.nickname}}"/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <label for="true_name" class="required">真实姓名</label>
+                                                    <input type="text" id="true_name" name="true_name"
+                                                           placeholder="请输入新的姓名" value="{{value.true_name}}"/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <label for="gender" class="required">性别</label>
+                                                    <input type="text" id="gender" name="gender"
+                                                           placeholder="请输入性别" value="{{value.gender}}"/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <label for="id_card" class="required">身份证号</label>
+                                                    <input type="text" id="id_card" name="id_card"
+                                                           placeholder="请输入身份证号" value="{{value.id_card}}"/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <label for="phone" class="required">联系电话</label>
+                                                    <input type="text" id="phone" name="phone"
+                                                           placeholder="请输入新的联系电话" value="{{value.phone}}"/>
+                                                </div>
+                                                <!-- 修改密码-->
+                                                <fieldset>
+                                                    <legend>修改密码</legend>
+                                                    <div class="single-input-item">
+                                                        <label for="current-pwd" class="required">原密码</label>
+                                                        <input type="text" id="current-pwd" value="{{value.password}}"
+                                                               readonly/>
+                                                    </div>
+                                                    <div class="single-input-item">
+                                                        <label for="new-pwd" class="required">新密码</label>
+                                                        <input type="password" id="new-pwd" placeholder="新密码"/>
+                                                    </div>
+                                                    <div class="single-input-item">
+                                                        <label for="confirm-pwd"
+                                                               class="required">请再次确认密码</label>
+                                                        <input type="password" id="confirm-pwd" name="password"
+                                                               placeholder="请再次输入新密码"/>
+                                                    </div>
+                                                </fieldset>
+                                                <div class="single-input-item">
+                                                    <button type="submit" class="check-btn sqr-btn ">确认修改</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+
+                                <!-- 我的订单 -->
+                                <div class="tab-pane fade" id="personal_order" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <h3>查看订单</h3>
+                                        <div class="myaccount-table table-responsive text-center">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th>商品名</th>
+                                                    <th>购买数量</th>
+                                                    <th>结算金额</th>
+                                                    <th>商品类型</th>
+                                                    <th>订单状态</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                {{each order_info value}}
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{value.goods_name}}</td>
+                                                    <td>{{value.goods_number}}</td>
+                                                    <td>{{value.total_price}}</td>
+                                                    <td>{{value.goods_version}}</td>
+                                                    <td>{{if value.order_status=='0'}}
+                                                        <p style="color: red">未发货</p>
+                                                        {{else }}
+                                                        <p style="color: #10591e">已发货</p>
+                                                        {{/if}}
+                                                    </td>
+                                                    {{if value.order_status=='0'}}
+                                                    <td>
+                                                        <p>商家还未发货，请等待！</p>
+                                                    </td>
+                                                    {{else}}
+                                                    <td>
+                                                        <p>已发货了哦！</p>
+                                                    </td>
+                                                    {{/if}}
+                                                </tr>
+                                                </tbody>
+                                                {{/each}}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 我的评论 -->
+                                <div class="tab-pane fade" id="personal_comment" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <h3>查看评论</h3>
+                                        <div class="myaccount-table table-responsive text-center">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th>商品名</th>
+                                                    <th>评论内容</th>
+                                                    <th>评论状态</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                {{each comment_info value}}
+                                                <tbody>
+                                                <tr>
+                                                    <td>{{value.goods_name}}</td>
+                                                    <td>{{value.content}}</td>
+                                                    <td>{{if value.comment_status=='0'}}已发表
+                                                        {{else if value.comment_status=='1'}}审核中
+                                                        {{else}}不允许发表
+                                                        {{/if}}
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:if(confirm('确认是否要删除该评论?')){location.href='/doDelComment?comment_id={{value.comment_id}}'}"
+                                                           class="check-btn sqr-btn ">删除该评论</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                {{/each}}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 我的地址 -->
+                                <div class="tab-pane fade" id="personal_address" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <h3>收件信息</h3>
+                                        {{each user_info value}}
+                                        <div class="account-details-form">
+                                            <form action="/doModifyPersonalInfo?user_id={{value.user_id}}&id=2"
+                                                  method="post">
+                                                <div class="single-input-item">
+                                                    <label for="consignee" class="required">收件人</label>
+                                                    <input type="text" id="consignee" name="consignee"
+                                                           placeholder="请输入新的收件人" value="{{value.consignee}}"/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <label for="consignee" class="required">收件人联系电话</label>
+                                                    <input type="text" id="consignee_phone" name="consignee_phone"
+                                                           placeholder="请输入新的收件人联系电话"
+                                                           value="{{value.consignee_phone}}"/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <label for="consignee" class="required">收件地址</label>
+                                                    <input type="text" id="consign_address" name="consign_address"
+                                                           placeholder="请输入新的收件地址" value="{{value.consign_address}}"/>
+                                                </div>
+                                                <div class="single-input-item">
+                                                    <button type="submit" class="check-btn sqr-btn ">确认修改</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--页脚-->
+<footer>
+    <div class="footer-bottom-area bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr pt-20 pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- Jquery Min Js -->
+<script src="js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper Min Js -->
+<script src="js/vendor/popper.min.js"></script>
+<!-- Bootstrap Min Js -->
+<script src="js/vendor/bootstrap.min.js"></script>
+<!-- Plugins Js-->
+<script src="js/plugins.js"></script>
+<!-- Ajax Mail Js -->
+<script src="js/ajax-mail.js"></script>
+<!-- Active Js -->
+<script src="js/main.js"></script>
+
+<script src="js/jQuery-3.4.1.js"></script>
+
+</body>
+
+</html>

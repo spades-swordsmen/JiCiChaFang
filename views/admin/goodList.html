@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>季疵茶坊|商品信息管理</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/admin_css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/invalid.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="/js/admin_js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/js/admin_js/simpla.jquery.configuration.js"></script>
+    <script type="text/javascript" src="/js/admin_js/facebox.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.wysiwyg.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.datePicker.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.date.js"></script>
+    <script type="text/javascript">
+        function del(obj) {//删除
+            var tr = obj.parentElement.parentElement;
+            tr.parentElement.removeChild(tr);//在tr的父节点的子列表中删除某个子元素，即删除tr
+        }
+
+        function mod(obj) {//修改
+            var val = obj.value;
+            var tr = obj.parentElement.parentElement;
+            var col = tr.cells[1];//数量单元格
+            if (val == "修改") {
+                obj.value = "确定";
+                var number = col.innerHTML;
+                //col.innerText="<input type='text' value='"+number+"'>";//此处将“修改”改为了普通文本
+                col.innerHTML = "<input type='text' value='" + number + "'>";//此处将“修改”改为了HTML文本，并且简化了代码量
+                /*尽量减少使用核心DOM的使用,使用HTMLDOM
+
+                 */
+            } else if (val == "确定") {
+                obj.value = "修改";
+                var number = col.firstElementChild.value;
+                col.innerHTML = number;
+            }
+
+        }
+
+        function add() {//增加订单
+            var pname = prompt("商品名称：");
+            var number = prompt("数量：");
+            var price = prompt("价格：");
+            var tbody = document.querySelector("tbody");
+            var tr = document.createElement("tr");
+            var html = "";
+            html += "<td>" + pname + "</td>";
+            html += "<td>" + number + "</td>";
+            html += "<td>" + price + "</td>";
+            html += "<td>";
+            html += "<input type='button' value='删除' onclick='del(this)'>";
+            html += "<input type='button' value='修改' onclick='mod(this)'>";
+            html += "</td>";
+            tr.innerHTML = html;
+            tbody.appendChild(tr);
+
+        }
+    </script>
+
+</head>
+<body>
+<div id="body-wrapper">
+    <div id="sidebar">
+        <div id="sidebar-wrapper">
+            <h1 id="sidebar-title">
+                <a href="#">季疵茶坊</a>
+            </h1>
+            <a href="#">
+                <img id="logo" src="/img/logo/logo.png" alt=""/>
+            </a>
+
+            <div id="profile-links"> 你好,
+                <a href="#" title="Edit your profile">管理员：{{true_name}}</a>
+                <br/>
+                <br/>
+                <a href="/" title="View the Site" class=" current">查看网站</a> |
+                <a href="/signOut" title="Sign Out">退出</a>
+            </div>
+
+            <!--选项栏-->
+            <ul id="main-nav">
+                <li>
+                    <a href="#" class="nav-top-item ">用户信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminUser/showUserList?true_name={{true_name}}">查看用户信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item current">商品信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="#" class="current">查看商品信息</a>
+                        </li>
+                        <li>
+                            <a href="/adminGood/addGood">新增商品</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-top-item ">订单信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminOrder/showOrderList?true_name={{true_name}}">查看订单信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item">评论信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminComment/showCommentList?true_name={{true_name}}">查看用户评论</a>
+                        </li>
+                    </ul>
+                </li>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <noscript>
+            <div class="notification error png_bg"></div>
+        </noscript>
+
+        <h2>欢迎，管理员！</h2>
+
+        <p id="page-intro">你想做些什么？</p>
+
+        <div class="clear"></div>
+        <div class="content-box">
+            <div class="content-box-header">
+                <h3>商品信息管理</h3>
+                <ul class="content-box-tabs">
+                    <li><a href="#tab1" class="default-tab">表</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="content-box-content">
+                <div class="tab-content default-tab" id="tab1">
+                    <div>
+                        <form action="/adminGood/doSearchGood" method="post">
+                            <input type="text" name="searchName" id="searchName" class="form" placeholder="请输入商品名">
+                            &ndash;
+                            <button type="submit" class="btn btn-success" id="searchGood">点击搜索</button>
+                        </form>
+                    </div>
+                    <!--商品信息管理-->
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>商品名</td>
+                            <td>类别</td>
+                            <td>库存</td>
+                            <td>销售量</td>
+                            <td>价格</td>
+                            <td></td>
+                            <td>状态</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each data value}}
+                        <tr>
+                            <td>{{ value.goods_id }}</td>
+                            <td>{{ value.goods_name }}</td>
+                            <td>{{ value.goods_category }}</td>
+                            <td>{{ value.stock_quantity }}</td>
+                            <td>{{ value.sales_quantity }}</td>
+                            <td>{{ value.price }}</td>
+                            <td>{{ value. goods_title }}</td>
+                            <td>{{if value.good_status=='0' }}新增
+                                {{else if value.good_status=='1'}}下架
+                                {{else}}上架
+                                {{/if}}
+                            </td>
+                            <td>
+                                {{if value.good_status!=='2'}}
+                                <button class="btn btn-success">
+                                    <a href="/adminGood/showGoodOne?goods_id={{value.goods_id}}&true_name={{true_name}}">编辑</a>
+                                </button>
+                                <button class="btn btn-success">
+                                    <a href="javascript:if(confirm('确认是否要删除该商品?')){location.href='/adminGood/doDeleteGood?goods_id={{value.goods_id}}'}">删除</a>
+                                </button>
+                                {{/if}}
+                                <button class="btn btn-success">
+                                    <a href="/adminGood/doOpen?goods_id={{value.goods_id}}&good_status=2">上架</a>
+                                </button>
+                                <button class="btn btn-success">
+                                    <a href="/adminGood/doOff?goods_id={{value.goods_id}}&good_status=1">下架</a>
+                                </button>
+                            </td>
+
+                            {{/each}}
+
+                        </tr>
+                        </tbody>
+                        <!-- 分页-->
+                        <tfoot>
+                        <tr>
+                            <td colspan="6">
+                                <div class="pagination">
+                                    <a href="#">信息条数：{{total}} </a>
+                                    <a href="/adminGood/showGoodList?currentPage=1" title="First Page">首页</a>
+                                    <a href="/adminGood/showGoodList?currentPage={{currentPage==1?1:(currentPage-1)}}"
+                                       title="Previous Page">上一页</a>
+                                    <!--<a href="#" class="number current" title="1">1</a>-->
+                                    <!--<a href="#" class="number" title="2">2</a>-->
+                                    <!--<a href="#" class="number" title="3">3</a>-->
+                                    <!--<a href="#" class="number" title="4">4</a>-->
+                                    <a href="/adminGood/showGoodList?currentPage={{currentPage==pages?pages:(currentPage+1)}}"
+                                       title="Next Page">下一页 </a>
+                                    <a href="/adminGood/showGoodList?currentPage={{pages}}" title="Last Page">页末 </a>
+                                    <a href="#">当前页数：{{currentPage}}/{{pages}}</a>
+                                    <a href="#">总页数：{{pages}}</a>
+                                </div>
+                                <div class="clear"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

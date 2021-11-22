@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>季疵茶坊|订单信息管理</title>
+    <link rel="stylesheet" href="/css/admin_css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/invalid.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/admin_js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/js/admin_js/simpla.jquery.configuration.js"></script>
+    <script type="text/javascript" src="/js/admin_js/facebox.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.wysiwyg.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.datePicker.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.date.js"></script>
+
+</head>
+<body>
+<div id="body-wrapper">
+    <div id="sidebar">
+        <div id="sidebar-wrapper">
+            <h1 id="sidebar-title">
+                <a href="#">季疵茶坊</a>
+            </h1>
+            <a href="#">
+                <img id="logo" src="/img/logo/logo.png" alt=""/>
+            </a>
+
+            <div id="profile-links"> 你好,
+                <a href="#" title="Edit your profile">管理员：{{true_name}}</a>
+                <br/>
+                <br/>
+                <a href="/" title="View the Site" class=" current">查看网站</a> |
+                <a href="/signOut" title="Sign Out">退出</a>
+            </div>
+
+            <!--选项栏-->
+            <ul id="main-nav">
+                <li>
+                    <a href="#" class="nav-top-item ">用户信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminUser/showUserList?true_name={{true_name}}">查看用户信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item ">商品信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminGood/showGoodList?true_name={{true_name}}">查看商品信息</a>
+                        </li>
+                        <li>
+                            <a href="/adminGood/addGood">新增商品</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-top-item current">订单信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="#"  class="current">查看订单信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item">评论信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminComment/showCommentList?true_name={{true_name}}">查看用户评论</a>
+                        </li>
+                    </ul>
+                </li>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <noscript>
+            <div class="notification error png_bg"></div>
+        </noscript>
+
+        <h2>欢迎，管理员！</h2>
+
+        <p id="page-intro">你想做些什么？</p>
+
+        <div class="clear"></div>
+        <div class="content-box">
+            <div class="content-box-header">
+                <h3>信息详情</h3>
+                <ul class="content-box-tabs">
+                    <li><a href="#tab1" class="default-tab">表</a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="content-box-content">
+                <div class="tab-content default-tab" id="tab1">
+                    <div class="notification attention png_bg">
+                        <a href="#" class="close">
+                            <img src="/images/icons/cross_grey_small.png" title="Close this notification"
+                                 alt="close"/>
+                        </a>
+
+                        <p style="text-align: center;">这是一个订单信息管理框。</p>
+                    </div>
+                    <div>
+                        <form action="/adminOrder/doSearchOrder?true_name={{true_name}}" method="post">
+                            <input type="text" name="searchName" id="searchName" class="form" placeholder="请输入用户的真实姓名">
+                            &ndash;
+                            <button type="submit" class="btn btn-success" name="searchOrder" id="searchOrder">点击搜索</button>
+                        </form>
+                    </div>
+                    <!--订单信息管理-->
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>用户ID</td>
+                            <td>商品名</td>
+                            <td>购买数量</td>
+                            <td>支付价格</td>
+                            <td>商品版本</td>
+                            <td>订单地址</td>
+                            <td>订单状态</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+
+                        {{each data value}}
+                        <tbody>
+                        <tr>
+                            <td>{{value.order_id}}</td>
+                            <td>{{value.user_id}}</td>
+                            <input type="hidden" value="{{value.goods_id}}">
+                            <td>{{value.goods_name}}</td>
+                            <td>{{value.goods_number}}</td>
+                            <td>{{value.total_price}}</td>
+                            <td>{{value.goods_version}}</td>
+                            <td>{{value.order_address}}</td>
+                            <td>{{if value.order_status=='0'}}未发货
+                                {{else}}发货
+                                {{/if}}
+                            </td>
+                            <td>
+                                {{if value.order_status=='0'}}
+                                <button class="btn btn-success">
+                                    <a href="/adminOrder/showOrderOne?order_id={{value.order_id}}&true_name={{true_name}}">编辑</a>
+                                </button>
+                                <button class="btn btn-success">
+                                    <a href="javascript:if(confirm('确认是否要删除该订单?')){location.href='/adminOrder/doDeleteOrder?order_id={{value.order_id}}'}">删除</a>
+                                </button>
+                                {{/if}}
+                                <button class="btn btn-success">
+                                    <a href="/adminOrder/doShipment?order_id={{value.order_id}}">发货</a>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {{/each}}
+                        <!--分页 -->
+                        <tfoot>
+                        <tr>
+                            <td colspan="6">
+                                <div class="pagination">
+                                    <a href="#">信息条数：{{total}} </a>
+                                    <a href="/adminOrder/showOrderList?currentPage=1" title="First Page">首页</a>
+                                    <a href="/adminOrder/showOrderList?currentPage={{currentPage==1?1:(currentPage-1)}}"
+                                       title="Previous Page">上一页</a>
+                                    <!--<a href="#" class="number current" title="1">1</a>-->
+                                    <!--<a href="#" class="number" title="2">2</a>-->
+                                    <!--<a href="#" class="number" title="3">3</a>-->
+                                    <!--<a href="#" class="number" title="4">4</a>-->
+                                    <a href="/adminOrder/showOrderList?currentPage={{currentPage==pages?pages:(currentPage+1)}}"
+                                       title="Next Page">下一页 </a>
+                                    <a href="/adminOrder/showOrderList?currentPage={{pages}}" title="Last Page">页末 </a>
+                                    <a href="#">当前页数：{{currentPage}}/{{pages}}</a>
+                                    <a href="#">总页数：{{pages}}</a>
+                                </div>
+                                <div class="clear"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

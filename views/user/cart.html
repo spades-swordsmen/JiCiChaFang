@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <!-- Site title -->
+    <title>我的购物车|季疵茶坊</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/simple-line-icons.css" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="css/helper.min.css" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="css/plugins.css" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!--页头部-->
+<header>
+
+    <div class="header-menu-area sticky pt-10 pb-10 pt-md-10 pb-md-10 pt-sm-10 pb-sm-10">
+        <div class="container">
+            <div class="header-menu-inner">
+                <div class="row align-items-center">
+                    <!-- logo-->
+                    <div class="col-lg-2 col-6">
+                        <div class="logo">
+                            <a href="#"><img src="/img/logo/logo.png" alt="brand logo"></a>
+                        </div>
+                    </div>
+                    <!-- 头部·左侧 导航栏-->
+                    <div class="col-lg-8 d-none d-lg-block">
+                        <div class="main-menu">
+                            <nav id="mobile-menu">
+                                <ul>
+                                    <li class="static">
+                                        <a href="/">首页</a>
+                                    </li>
+                                    <li class="static">
+                                        <a href="/showGoodList">商品</a>
+                                    </li>
+                                    <li class="static">
+                                        <a href="/showCollectGood">我的收藏</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">购物车</a>
+                                    </li>
+                                    <li>
+                                        <a href="/showPersonal">个人中心</a>
+                                    </li>
+                                    <li>
+                                        <a href="/login">你好!{{true_name}}</a>
+                                    </li>
+                                    {{if user_id}}
+                                    <li>
+                                        <a href="/signOut">退出</a>
+                                    </li>
+                                    {{/if}}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- 头部·右侧（搜索框和购物车商品数量显示）-->
+                    <div class="col-lg-2 col-6">
+                        <div class="header-cart-option">
+                            <!--搜索框-->
+                            <div class="header-search">
+                                <!-- 搜索图标-->
+                                <div class="header-search-btn">
+                                    <i class="icon-magnifier"></i>
+                                </div>
+                                <!-- 搜索栏-->
+                                <div class="search-box">
+                                    <form action="/doSearchGoods?" method="post">
+                                        <input type="text" name="goods_name" placeholder="看看有些啥？">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-block d-lg-none">
+                        <div class="mobile-menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="cart-main-wrapper  pb-6 pt-sm-50 pb-sm-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- 购物车表 -->
+                <div class="cart-table table-responsive">
+                    <table class="table table-bordered" id="cart">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" class="allSelect">全选</th>
+                            <th class="pro-thumbnail" colspan="2">商品</th>
+                            <th class="pro-price1">价格</th>
+                            <th class="pro-quantity">数量</th>
+                            <th class="pro-quantity">小计</th>
+                            <th class="pro-quantity" colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each cartInfo value}}
+                        <tr>
+                            <td><input type="checkbox" class="select" value="{{value.goods_id}}"></td>
+                            <!-- 商品图片-->
+                            <td class="pro-thumbnail">
+                                <a href="#">
+                                    <img class="img-fluid" src="/img/product/{{value.pic1}}" alt="productImage"/>
+                                </a>
+                            </td>
+                            <!-- 商品名-->
+                            <td class="pro-title">
+                                <a href="#">{{value.goods_name}}</a>
+                            </td>
+                            <!-- 商品价格-->
+                            <td class="pro-price2">
+                                ￥<span>{{value.price}}</span>
+                            </td>
+                            <!-- 商品数量-->
+                            <td class="pro-quantity">
+                                <div>
+                                    <input type="hidden" id="goods_id" class="goods_id" value="{{value.goods_id}}">
+
+                                    <div class="minus" style="float: left;">-</div>
+                                    <div class="amount" style="float: left;" id="quantity">{{value.count}}</div>
+                                    <div class="adds" style="float: left;">+</div>
+                                </div>
+                            </td>
+                            <!-- 小计-->
+                            <td class="total">
+                                ￥<span></span>
+                            </td>
+                            <!-- 立即购买-->
+                            {{if cartInfo[0].good_status=='2'}}
+                            <td class="pro-subtotal">
+                                <input type="hidden" value="{{value.goods_id}}"/>
+                                <a href="#" class="doClearingAccount">
+                                    <img src="img/product/buy.png" style="height: 25px;width: 25px"/>
+                                    立即购买
+                                </a>
+                            </td>
+                            {{else}}
+                            <td class="pro-subtotal">
+                                <a href="#">
+                                    商品已下架
+                                </a>
+                            </td>
+                            {{/if}}
+                            <!-- 从购物车中删除该商品-->
+                            <td class="pro-remove">
+                                <i class="fa fa-trash-o"></i>
+                                <input type="hidden" value="{{value.goods_id}}"/>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 分页-->
+                <div class="paginatoin-area text-center pt-30 mt-30">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="pagination-box">
+                                <li><a href="/showCart?currentPage=1" title="First Page">首页</a></li>
+                                <li><a href="/showCart?currentPage={{currentPage==1?1:(currentPage-1)}}"
+                                       title="Previous Page">上一页</a></li>
+                                <!--<li><a href="#">1</a></li>-->
+                                <!--<li><a href="#">2</a></li>-->
+                                <!--<li><a href="#">3</a></li>-->
+                                <li><a href="/showCart?currentPage={{currentPage==pages?pages:(currentPage+1)}}"
+                                       title="Next Page">下一页 </a></li>
+                                <li><a href="/showCart?currentPage={{pages}}" title="Last Page">页末</a></li>
+                                <li><a href="#" title="Last Page">总页数：{{pages}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 ml-12">
+                <!-- 购物车结算信息-->
+                <div class="cart-calculator-wrapper">
+                    <div class="cart-calculate-items">
+                        <h3>购物车结算</h3>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <td>选择数量（/个）</td>
+                                    <td id="NumOfGoods"></td>
+                                </tr>
+                                <tr>
+                                    <td>支付金额/商品总价（单位：RMB）</td>
+                                    <td id="allAdd" class="total-amount">
+                                        <span></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <a href="#" class="sqr-btn d-block" id="doClearingAccount">确认支付</a>
+                    <input type="hidden" id="accountID" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 页底部-->
+<footer>
+    <!-- footer bottom area start -->
+    <div class="footer-bottom-area mt-20 bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr  pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer bottom area end -->
+
+</footer>
+
+
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+
+
+<!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+<script src="js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- Jquery Min Js -->
+<script src="js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper Min Js -->
+<script src="js/vendor/popper.min.js"></script>
+<!-- Bootstrap Min Js -->
+<script src="js/vendor/bootstrap.min.js"></script>
+<!-- Plugins Js-->
+<script src="js/plugins.js"></script>
+<!-- Ajax Mail Js -->
+<script src="js/ajax-mail.js"></script>
+<!-- Active Js -->
+<script src="js/main.js"></script>
+
+<script>
+    //避免兼容性问题，封装className
+    function getClass(className) {
+        let classArray = [];
+        let nodes = document.getElementsByTagName("*");
+        //当遍历到的标签节点的className属性的值与输入的值相同时，就将这个节点加入到前面声明的数组中去
+        //即，获取此class名的标签节点
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].className == className) {
+                classArray.push(nodes[i]);
+            }
+        }
+        return classArray;
+    }
+
+    //获取购物车表
+    var cart = document.getElementById("cart");
+    //多选框
+    var select = getClass("select");
+    //价格
+    var prices = document.querySelectorAll('.pro-price2 span');
+    //小计
+    var totals = document.querySelectorAll('.total span');
+    //减号
+    var minus = getClass("minus");
+    //数量
+    var amount = getClass("amount");
+    //加号
+    var adds = getClass("adds");
+    //全选商品的数量
+    var NumOfGoods = document.getElementById("NumOfGoods");
+    //合计
+    var allAdd = document.getElementById("allAdd");
+    //全选框
+    var allSelect = getClass("allSelect");
+    //删除操作
+    var remove = getClass("pro-remove");
+    //单独购买操作
+    var clearingAccount = getClass("doClearingAccount");
+    //结算
+    var doClearingAccount = document.getElementById("doClearingAccount");
+
+    //运行小计计算函数
+    count();
+    //运行总价计算函数
+    countAll();
+
+    //进行小计的计算，保留两位小数
+    /*innerHTML 属性设置或返回表格行的开始和结束标签之间的 HTML。*/
+    function count() {
+        //console.log(totals[0].innerHTML);
+        for (var i = 0; i < prices.length; i++) {
+            totals[i].innerHTML = parseInt(prices[i].innerText) * parseInt(amount[i].innerHTML);
+        }
+    }
+
+    //进行总价的计算
+    function countAll() {
+        var num1 = 0;
+        var num2 = 0;
+        //注意，每次计算总价应该重新取得一次select,amount和totals，因为执行删除操作时，会让这几个值发生变化
+        var select = getClass("select");  //多选框
+        var amount = getClass("amount");  //数量
+        var totals = document.querySelectorAll('.total span');  //小计
+        //遍历所有商品。若该商品被选中（多选框被选择），就获取该商品的数量和小计的值。
+        for (var i = 0; i < select.length; i++) {
+            if (select[i].checked == true) {
+                num1 += parseInt(amount[i].innerHTML);
+                num2 += parseFloat(totals[i].innerHTML);
+            }
+        }
+        //总数
+        NumOfGoods.innerHTML = num1;
+        //合计
+        allAdd.innerHTML = num2;
+    }
+
+    //定义函数，来判断是否全选
+    /*全选*/
+    function ifAllSelected() {
+        var allSelected = true;
+        for (var i = 0; i < select.length; i++) {
+            if (select[i].checked == false) {
+                allSelected = false;
+            }
+        }
+        return allSelected;
+    }
+    /*未全选*/
+    function ifNotAllSelected() {
+        var notAllSelected = false;
+        for (var i = 0; i < select.length; i++) {
+            if (select[i].checked == false) {
+                notAllSelected = true;
+            }
+        }
+        return notAllSelected;
+    }
+
+    //保存所有商品id
+    var allId = [];
+    var newAllId = [];
+    //单独选取商品
+    function func_select(param) {
+        var number = param;
+        var i;
+        var j;
+        allId.push(number);
+        if (allId.length > 2) {
+            for (i = 0; i < allId.length; i++) {
+                for (j = i + 1; j < allId.length; j++) {
+                    if (allId[i] === allId[j]) {
+                        //var num = allId[j];
+                        allId.splice(i + 1);
+                        j = ++i;
+                        //newAllId.push(allId[i]);
+                        //console.log(allId[i]);
+                    }
+                }
+            }
+        }
+        console.log(allId);
+        var accountID = document.getElementById("accountID");
+        accountID.value = allId;
+        console.log(document.getElementById("accountID").value);
+    }
+
+
+    //全选商品
+    function func_selectAll() {
+        for (var i = 0; i < select.length; i++) {
+            var numberAll = select[i].value;
+            func_select(numberAll);
+        }
+    }
+
+    //为（所有的）全选框添加一个 onclick 事件：每次点击一次全选框就计算一次总价
+    for (var i = 0; i < allSelect.length; i++) {
+        allSelect[i].onclick = function () {
+            for (var j = 0; j < select.length; j++) {
+                select[j].checked = this.checked;
+            }
+            for (j = 0; j < allSelect.length; j++) {
+                allSelect[j].checked = this.checked;
+            }
+            //每次点击一次全选框就计算一次总价
+            countAll();
+            func_selectAll();
+        }
+    }
+
+    //为所有的选框添加 onclick 事件：
+    for (i = 0; i < select.length; i++) {
+        select[i].onclick = function () {
+            if (ifAllSelected()) {
+                for (var j = 0; j < allSelect.length; j++) {
+                    allSelect[j].checked = true;
+                }
+            }
+            if (ifNotAllSelected()) {
+                for (j = 0; j < allSelect.length; j++) {
+                    allSelect[j].checked = false;
+                }
+            }
+            countAll();
+            if (this.checked == true) {
+                var param = this.value;
+                //调用函数 func_select ，将所选择的商品id值传入数组
+                func_select(param);
+            }
+        };
+    }
+
+
+    //对购物车商品数量进行处理
+    for (i = 0; i < adds.length; i++) {
+        //为“加号”添加 onclick 事件
+        adds[i].onclick = function () {
+            //声明变量 num ：商品数量
+            var num = parseInt(this.parentNode.childNodes[5].innerHTML);
+            num += 1;
+            this.parentNode.childNodes[5].innerHTML = num;
+            count();
+            countAll();
+            //获取商品id
+            var goods_id1 = this.parentNode.childNodes[1].value;
+            //使用ajax对数据库中的商品数量进行实时更改
+            $.ajax({
+                url: "/doModifyByCart?goods_id=" + goods_id1 + "&count=" + num
+            });
+        };
+        //为“减号”添加 onclick 事件
+        minus[i].onclick = function () {
+            var num = parseInt(this.parentNode.childNodes[5].innerHTML);
+            num -= 1;
+            if (num < 1) {
+                num = 1;
+            }
+            this.parentNode.childNodes[5].innerHTML = num;
+            count();
+            countAll();
+            //获取商品id
+            var goods_id2 = this.parentNode.childNodes[1].value;
+            //使用ajax对数据库中的商品数量进行实时更改
+            $.ajax({
+                url: "/doModifyByCart?goods_id=" + goods_id2 + "&count=" + num
+            })
+        };
+        //为“删除”添加 onclick 事件
+        //删除时也应该重新计算总价，或者先判断商品是否被选中，有选中则重新计算
+        remove[i].onclick = function () {
+            //var goods_id = $(this).prev().prev().children().children("div:eq(2)").text();
+            //获取商品id
+            var goods_id = this.childNodes[3].value;
+            $.ajax({
+                url: "/doDeleteByCart?goods_id=" + goods_id
+            });
+            cart.childNodes[3].removeChild(this.parentNode);
+            countAll();
+        };
+        //为“立即购买”操作添加 onclick 事件
+        clearingAccount[i].onclick = function () {
+            var goods_id = this.parentNode.childNodes[1].value;
+            var quantity = this.parentNode.parentNode.childNodes[17].childNodes[1].childNodes[5].innerHTML;  //数量
+            var totals = this.parentNode.parentNode.childNodes[21].childNodes[1].innerHTML;  //小计
+            function doClearingAccount() {
+                $(".doClearingAccount").attr("href", "/doClearingAccount?goods_id=" + goods_id + "&quantity=" + quantity + "&totals=" + totals + "&path=3");
+            }
+
+            doClearingAccount();
+        }
+    }
+    //    doClearingAccount.onclick = function () {
+    ////        var goods_idArray = [];
+    ////        var goods_id = this.parentNode.childNodes[1].value;
+    ////        var quantity = this.parentNode.parentNode.childNodes[17].childNodes[1].childNodes[5].innerHTML;  //数量
+    ////        var totals = this.parentNode.parentNode.childNodes[21].childNodes[1].innerHTML;  //小计
+    //    }
+    doClearingAccount.onclick = function () {
+        var accountID = document.getElementById("accountID").value;
+        var quantity = this.parentNode.parentNode.parentNode.parentNode.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[3].childNodes[1].childNodes[17].childNodes[1].childNodes[5].innerHTML;  //数量
+        var allAdd = this.parentNode.parentNode.parentNode.childNodes[1].childNodes[3].childNodes[1].childNodes[3].childNodes[1].childNodes[1].childNodes[2].childNodes[3].innerHTML;  //合计
+        console.log(allAdd);
+        function doClearingAccount() {
+            $("#doClearingAccount").attr("href", "/doClearingAccount?goods_id=" + accountID + "&quantity=" + quantity + "&totals=" + allAdd + "&path=1");
+        }
+
+         doClearingAccount();
+    };
+</script>
+</body>
+
+</html>

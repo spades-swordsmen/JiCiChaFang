@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>商品信息管理|添加商品</title>
+
+    <link rel="stylesheet" href="/css/admin_css/reset.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/admin_css/invalid.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/admin_js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/js/admin_js/simpla.jquery.configuration.js"></script>
+    <script type="text/javascript" src="/js/admin_js/facebox.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.wysiwyg.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.datePicker.js"></script>
+    <script type="text/javascript" src="/js/admin_js/jquery.date.js"></script>
+
+</head>
+<body>
+<div id="body-wrapper">
+    <div id="sidebar">
+        <div id="sidebar-wrapper">
+            <h1 id="sidebar-title">
+                <a href="#">季疵茶坊</a>
+            </h1>
+            <a href="#">
+                <img id="logo" src="/img/logo/logo.png" alt=""/>
+            </a>
+
+            <div id="profile-links"> 你好,
+                <a href="#" title="Edit your profile">管理员：{{true_name}}</a>
+                <br/>
+                <br/>
+                <a href="/" title="View the Site" class=" current">查看网站</a> |
+                <a href="/signOut" title="Sign Out">退出</a>
+            </div>
+
+            <!--选项栏-->
+            <ul id="main-nav">
+                <li>
+                    <a href="#" class="nav-top-item ">用户信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminUser/showUserList?true_name={{true_name}}">查看用户信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item current">商品信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminGood/showGoodList?true_name={{true_name}}">查看商品信息</a>
+                        </li>
+                        <li>
+                            <a href="#" class="current">新增商品</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-top-item ">订单信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminOrder/showOrderList?true_name={{true_name}}">查看订单信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="nav-top-item">评论信息管理</a>
+                    <ul>
+                        <li>
+                            <a href="/adminComment/showCommentList?true_name={{true_name}}">查看用户评论</a>
+                        </li>
+                    </ul>
+                </li>
+        </div>
+    </div>
+</div>
+<div id="main-content">
+    <noscript>
+        <div class="notification error png_bg"></div>
+    </noscript>
+
+    <h2>欢迎，管理员！</h2>
+    <p id="page-intro">你想做些什么？</p>
+
+    <div class="clear"></div>
+    <div class="content-box">
+        <div class="content-box-header">
+            <h3>新增商品</h3>
+            <div class="clear"></div>
+        </div>
+        <!-- 新增商品信息 -->
+        <div class="tab-pane fade" id="tab1">
+            <div class="myaccount-content">
+                <h3>新增商品</h3>
+                <div class="account-details-form">
+                    <form action="/adminGood/doAddGood" method="post"  enctype="multipart/form-data">
+                        <div class="single-input-item">
+                            <label for="account" class="required">商品名称</label>
+                            <input type="text" id="account" name="goods_name" placeholder="请输入商品名称"  />
+                        </div>
+                        <div class="single-input-item">
+                            <label for="specification" class="required">商品规格</label>
+                            <input type="text" id="specification" name="specification"
+                                   placeholder="请输入商品规格" value=""/>
+                        </div>
+                        <div class="single-input-item">
+                            <label  for="recommended" class="required">推荐指数</label>
+                            <input type="text" id="recommended" name="recommended" />
+                            <fieldset class="starability-slot"  >
+                                <input type="radio" id="rate_1_0_1_5" name="starLevel" value="5" />
+                                <label for="rate_1_0_1_5" title="5星"></label>
+                                <input type="radio" id="rate_1_0_1_4" name="starLevel" value="4" />
+                                <label for="rate_1_0_1_4" title="4星"></label>
+                                <input type="radio" id="rate_1_0_1_3" name="starLevel" value="3" />
+                                <label for="rate_1_0_1_3" title="3星"></label>
+                                <input type="radio" id="rate_1_0_1_2" name="starLevel" value="2" />
+                                <label for="rate_1_0_1_2" title="2星"></label>
+                                <input type="radio" id="rate_1_0_1_1" name="starLevel"   />
+                                <label for="rate_1_0_1_1" title="1星"></label>
+                            </fieldset>
+                            <span id="starStr"></span>
+                        </div>
+                        <div class="single-input-item">
+                            <label for="price" class="required">价格</label>
+                            <input type="text" id="price" name="price" placeholder="请输入商品价格"  />
+                        </div>
+
+                        <div class="single-input-item">
+                            <label for="goods_words" class="required">商品详情信息</label>
+                            <input type="text" id="goods_words" name="goods_words" placeholder="字数限制在50字以内"  />
+                        </div>
+                        <div class="single-input-item">
+                            <label for="goods_title" class="required">商品噱头</label>
+                            <input type="text" id="goods_title" name="goods_title" placeholder="字数限制在10字以内"  />
+                        </div>
+                        <div class="single-input-item">
+                            <label for="goods_category" class="required">商品类别</label>
+                            <input type="text" id="goods_category" name="goods_category" placeholder="如：'大红袍、花茶、普洱茶、养生茶'"  />
+                        </div>
+                        <div class="single-input-item">
+                            <label for="scenario" class="required">适用情景</label>
+                            <input type="text" id="scenario" name="scenario" placeholder="如：'送礼、早茶、下午茶、聚会'"  />
+                        </div>
+                        <div class="single-input-item">
+                            <label for="pro_date" class="required">生产日期</label>
+                            <input type="date" id="pro_date" name="pro_date" placeholder="生产日期"/>
+                        </div>
+                        <div class="single-input-item">
+                            <label for="ex_date" class="required">保质期</label>
+                            <input type="date" id="ex_date" name="ex_date" placeholder="保质期"/>
+                        </div>
+                        <div class="single-input-item">
+                            <label for="stock_quantity" class="required">商品库存量</label>
+                            <input type="text" id="stock_quantity" name="stock_quantity"
+                                   placeholder="请输入商品库存量"  />
+                        </div>
+                        <div class="single-input-item">
+                            <label for="sales_quantity" class="required">商品销售量</label>
+                            <input type="text" id="sales_quantity" name="sales_quantity"
+                                   placeholder="请输入商品销售量"  />
+                        </div>
+
+                        <div class="single-input-item form-group">
+                            <label for="pic1" class="required">图片1</label>
+                            <p class="help-block">请选择要上传的商品图片</p>
+                            <input type="file" class="form-control" id="pic1" name="pic1" accept="image/*">
+                        </div>
+                        <div class="single-input-item">
+                            <label for="pic2" class="required">图片2</label>
+                            <p class="help-block">请选择要上传的商品图片</p>
+                            <input type="file" class="form-control" id="pic2" name="pic2" accept="image/*">
+                        </div>
+                        <div class="single-input-item">
+                            <label for="pic3" class="required">图片3</label>
+                            <p class="help-block">请选择要上传的商品图片</p>
+                            <input type="file" class="form-control" id="pic3" name="pic3" accept="image/*">
+                        </div>
+                        <div class="single-input-item">
+                            <label for="pic4" class="required">图片4</label>
+                            <p class="help-block">请选择要上传的商品图片</p>
+                            <input type="file" class="form-control" id="pic4" name="pic4" accept="image/*">
+                        </div>
+                        <div class="single-input-item">
+                            <button type="submit" class="check-btn sqr-btn ">确定添加</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('[name="starLevel"]').bind("click",function(){
+        $("#starNum").val($(this)[0].value)
+        var starNum = $(this)[0].value;
+        if(starNum == 1) {$("#starStr").text("差"); $("#recommended").val(1);}
+        if(starNum == 2) {$("#starStr").text("一般");$("#recommended").val(2);}
+        if(starNum == 3) {$("#starStr").text("喜欢");$("#recommended").val(3);}
+        if(starNum == 4) {$("#starStr").text("推荐");$("#recommended").val(4);}
+        if(starNum == 5) {$("#starStr").text("超级喜欢");$("#recommended").val(5);}
+    })
+</script>
+
+<footer>
+    <div class="footer-bottom-area bg-gray">
+        <div class="container">
+            <div class="footer-seperator bdr pt-20 pb-20">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 order-md-1 order-2">
+                        <div class="copyright-text text-center text-md-left">
+                            <p> © 2020 季疵茶坊, 保留所有权.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
